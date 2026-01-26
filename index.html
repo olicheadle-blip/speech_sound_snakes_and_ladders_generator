@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snakes & Ladders</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="card controls">
+      <h1>Snakes &amp; Ladders</h1>
+
+      <div class="row">
+        <div style="flex:1; min-width:260px;">
+          <label for="dialect">Language</label>
+          <select id="dialect">
+            <option value="UK" selected>UK English</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="flex:1; min-width:260px;">
+          <label for="sound1">Target sounds (up to 3)</label>
+          <div class="targetsLine">
+            <select id="sound1" aria-label="Target sound 1" style="min-width:180px;">
+              <option value="b" selected>/b/</option>
+              <option value="p">/p/</option>
+              <option value="t">/t/</option>
+              <option value="d">/d/</option>
+              <option value="k">/k/</option>
+              <option value="g">/g/</option>
+              <option value="m">/m/</option>
+              <option value="n">/n/</option>
+              <option value="ng">/ŋ/</option>
+              <option value="f">/f/</option>
+              <option value="v">/v/</option>
+              <option value="th">/θ/</option>
+              <option value="dh">/ð/</option>
+              <option value="s">/s/</option>
+              <option value="z">/z/</option>
+              <option value="sh">/ʃ/</option>
+              <option value="zh">/ʒ/</option>
+              <option value="h">/h/</option>
+              <option value="ch">/tʃ/</option>
+              <option value="j">/dʒ/</option>
+              <option value="l">/l/</option>
+              <option value="r">/r/</option>
+              <option value="y">/j/</option>
+              <option value="w">/w/</option>
+            </select>
+
+            <select id="sound2" aria-label="Target sound 2" style="min-width:180px;">
+              <option value="" selected>Select target</option>
+              <option value="b">/b/</option>
+              <option value="p">/p/</option>
+              <option value="t">/t/</option>
+              <option value="d">/d/</option>
+              <option value="k">/k/</option>
+              <option value="g">/g/</option>
+              <option value="m">/m/</option>
+              <option value="n">/n/</option>
+              <option value="ng">/ŋ/</option>
+              <option value="f">/f/</option>
+              <option value="v">/v/</option>
+              <option value="th">/θ/</option>
+              <option value="dh">/ð/</option>
+              <option value="s">/s/</option>
+              <option value="z">/z/</option>
+              <option value="sh">/ʃ/</option>
+              <option value="zh">/ʒ/</option>
+              <option value="h">/h/</option>
+              <option value="ch">/tʃ/</option>
+              <option value="j">/dʒ/</option>
+              <option value="l">/l/</option>
+              <option value="r">/r/</option>
+              <option value="y">/j/</option>
+              <option value="w">/w/</option>
+            </select>
+
+            <select id="sound3" aria-label="Target sound 3" style="min-width:180px;">
+              <option value="" selected>Select target</option>
+              <option value="b">/b/</option>
+              <option value="p">/p/</option>
+              <option value="t">/t/</option>
+              <option value="d">/d/</option>
+              <option value="k">/k/</option>
+              <option value="g">/g/</option>
+              <option value="m">/m/</option>
+              <option value="n">/n/</option>
+              <option value="ng">/ŋ/</option>
+              <option value="f">/f/</option>
+              <option value="v">/v/</option>
+              <option value="th">/θ/</option>
+              <option value="dh">/ð/</option>
+              <option value="s">/s/</option>
+              <option value="z">/z/</option>
+              <option value="sh">/ʃ/</option>
+              <option value="zh">/ʒ/</option>
+              <option value="h">/h/</option>
+              <option value="ch">/tʃ/</option>
+              <option value="j">/dʒ/</option>
+              <option value="l">/l/</option>
+              <option value="r">/r/</option>
+              <option value="y">/j/</option>
+              <option value="w">/w/</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="position">Sound position</label>
+          <select id="position">
+            <option value="any" selected>Any</option>
+            <option value="initial">Initial</option>
+            <option value="final">Final</option>
+          </select>
+        </div>
+
+        <div style="min-width:260px;">
+          <label for="shape">Word shape</label>
+          <select id="shape">
+            <option value="CV+CVV">CV+CVV</option>
+            <option value="CVC+CVVC" selected>CVC+CVVC</option>
+            <option value="CCVC+CCVVC">CCVC+CCVVC</option>
+            <option value="CVCC+CVVCC">CVCC+CVVCC</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="theme">Print mode</label>
+          <select id="theme">
+            <option value="color" selected>Colour</option>
+            <option value="bw">Black &amp; white</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="btnRow">
+        <button class="primary" id="btnGenerate" type="button">Generate board</button>
+        <button class="ghost" id="btnDownload" type="button">Download PNG</button>
+        <button class="ghost" id="btnPrint" type="button">Print / Save PDF</button>
+      </div>
+
+      <div class="attribution" aria-label="Icon attribution">
+        Emoji artwork from
+        <a href="https://openmoji.org/" target="_blank" rel="noopener noreferrer">OpenMoji</a>
+        (CC BY-SA 4.0) and
+        <a href="https://twemoji.twitter.com/" target="_blank" rel="noopener noreferrer">Twemoji</a>
+        (CC BY 4.0).
+      </div>
+
+      <div class="note" style="margin-top:8px; font-size:12px; opacity:0.85;">
+        Made by Oli Cheadle. This is an independent tool and does not represent the content on the Cognishine platform.
+      </div>
+
+      <div class="hint" id="note" style="margin-top:10px; display:none;"></div>
+    </div>
+
+    <div class="card canvasWrap">
+      <canvas id="c" width="980" height="1180"></canvas>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
