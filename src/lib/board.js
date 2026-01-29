@@ -141,7 +141,7 @@ export function createBoardRenderer({ canvas, setNote }){
   // Meta line
   ctx.font = 'bold 18px system-ui, -apple-system, Segoe UI, Roboto, Arial';
   const themeLabel = meta.themeLabel ? ` (${meta.themeLabel})` : '';
-  ctx.fillText(`Target: ${meta.soundLabel} - ${meta.posLabel} - ${meta.shapeLabel}${themeLabel}`, 40, 78);
+  ctx.fillText(`${meta.dialectLabel} • Target: ${meta.soundLabel} - ${meta.posLabel} - ${meta.shapeLabel}${themeLabel}`, 40, 78);
 
   // Target words grouped by sound
   ctx.font = '600 15px system-ui, -apple-system, Segoe UI, Roboto, Arial';
@@ -742,11 +742,11 @@ function drawBoardBase(bw){
       : '—';
 
     return {
-      dialectLabel: 'UK English',
+      dialectLabel: (String(dialect || 'UK').toUpperCase() === 'US') ? 'US English' : 'UK English',
       soundLabel,
       posLabel: position === 'any' ? 'Any position' : (position[0].toUpperCase() + position.slice(1)),
       shapeLabel: shapeGroup,
-      themeLabel: theme === 'bw' ? 'B/W' : 'Colour'
+      themeLabel: theme === 'bw' ? 'B/W' : ((String(dialect || 'UK').toUpperCase() === 'US') ? 'Color' : 'Colour')
     };
   }
 
@@ -755,7 +755,21 @@ function drawBoardBase(bw){
     resetIconCache(); // keeps colour/BW accurate and avoids stale failures
 
     // STRICT selection (UK only): no relaxing rules.
-    const bank = selectBank(settings);
+    const rawBank = selectBank(settings);
+
+    // Rule: if two target words share the same symbol, only use one of those
+    // targets (on the board and in the header list). We de-duplicate by hex
+    // here so every icon appears at most once.
+    const seenHex = new Set();
+    const bank = [];
+    for (const it of rawBank){
+      const hx = it?.hex;
+      if (!hx) continue;
+      if (seenHex.has(hx)) continue;
+      seenHex.add(hx);
+      bank.push(it);
+    }
+
     if (bank.length < 2){
       // Clear canvas and show message.
       ctx.clearRect(0,0,W,H);

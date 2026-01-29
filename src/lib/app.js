@@ -72,7 +72,7 @@ export function createSnakesLaddersApp({ canvasId, noteId, controls }){
     }
 
     return {
-      dialect: 'UK',
+      dialect: ui.dialect?.value || 'UK',
       sounds,
       position: ui.position?.value || 'any',
       shapeGroup: ui.shape?.value || 'CVC+CVVC',

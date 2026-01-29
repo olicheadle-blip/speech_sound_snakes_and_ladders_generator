@@ -1,4 +1,4 @@
-import { WORD_BANK, normalizeHex } from './wordBank.js';
+import { WORD_BANK, US_EXTRAS, normalizeHex } from './wordBank.js';
 
 export function entryShape(entry, dialect){
   if (entry?.shapes?.[dialect]) return entry.shapes[dialect];
@@ -16,9 +16,17 @@ export function shapesForGroup(group){
 }
 
 export function selectBank({ sounds, sound, position, shapeGroup, dialect }){
-  dialect = 'UK'; // UK-only for now
+  dialect = (String(dialect || 'UK').toUpperCase() === 'US') ? 'US' : 'UK';
 
   let bank = WORD_BANK.slice();
+
+  // Dialect-specific tweaks.
+  if (dialect === 'US'){
+    // Prefer US forms where it matters.
+    // - Hide UK-only "mum" and add "mom" (same icon).
+    bank = bank.filter(w => (w?.orth || '').toLowerCase() !== 'mum');
+    bank = bank.concat(US_EXTRAS);
+  }
 
   // sound filter
   const picked = Array.isArray(sounds) ? sounds.filter(Boolean) : [];
